@@ -16,32 +16,32 @@ namespace InvoiceApp.Controllers
         }
 
     [HttpPost]
-public IActionResult ViewInvoice(string invoiceNo)
-{
-    if (string.IsNullOrWhiteSpace(invoiceNo))
+    public IActionResult ViewInvoice(string invoiceNo)
     {
-        return View("Index"); 
+        if (string.IsNullOrWhiteSpace(invoiceNo))
+        {
+            return View("Index"); 
+        }
+
+        var invoice = _context.TrInvoices
+            .Include(i => i.Sales)
+            .Include(i => i.Courier)
+            .Include(i => i.Payment)
+            .Include(i => i.InvoiceDetails)
+            .FirstOrDefault(i => i.InvoiceNo == invoiceNo);
+
+        if (invoice == null)
+        {
+            ViewBag.Message = "Invoice not found";
+            return View("Index");
+        }
+
+        return View("Index", invoice); 
     }
 
-    var invoice = _context.TrInvoices
-        .Include(i => i.Sales)
-        .Include(i => i.Courier)
-        .Include(i => i.Payment)
-        .Include(i => i.InvoiceDetails)
-        .FirstOrDefault(i => i.InvoiceNo == invoiceNo);
-
-    if (invoice == null)
-    {
-        ViewBag.Message = "Invoice not found";
-        return View("Index");
-    }
-
-    return View("Index", invoice); 
-}
 
 
-
-        [HttpGet]
+    [HttpGet]
     public async Task<IActionResult> Index(string invoiceNo)
     {
         TrInvoice invoice = null;
@@ -60,7 +60,29 @@ public IActionResult ViewInvoice(string invoiceNo)
         return View(invoice); 
     }
 
-    // === API ===
+    [HttpPost]
+    public IActionResult UpdateInvoiceDetails(TrInvoice model)
+    {
+        if (model.InvoiceDetails != null && model.InvoiceDetails.Any())
+        {
+            foreach (var detail in model.InvoiceDetails)
+            {
+                var existing = _context.TrInvoiceDetails.FirstOrDefault(x => x.InvoiceNo == detail.InvoiceNo);
+                if (existing != null)
+                {
+                    existing.Qty = detail.Qty;
+                    existing.Weight = detail.Weight;
+                    existing.Price = detail.Price;
+                }
+            }
+
+            _context.SaveChanges();
+        }
+
+        return Redirect("/?invoiceNo=" + model.InvoiceNo);
+    }
+
+
     [HttpGet("api/invoice/{invoiceNo}")]
     public async Task<IActionResult> GetInvoice(string invoiceNo)
     {
@@ -77,5 +99,7 @@ public IActionResult ViewInvoice(string invoiceNo)
 
         return Ok(invoice);
     }
+
+    
     }
 }
