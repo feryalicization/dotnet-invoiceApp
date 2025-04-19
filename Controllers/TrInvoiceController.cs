@@ -15,172 +15,67 @@ namespace InvoiceApp.Controllers
             _context = context;
         }
 
-        // GET: TrInvoice
-        public async Task<IActionResult> Index()
+    [HttpPost]
+public IActionResult ViewInvoice(string invoiceNo)
+{
+    if (string.IsNullOrWhiteSpace(invoiceNo))
+    {
+        return View("Index"); // Or redirect to Index
+    }
+
+    var invoice = _context.TrInvoices
+        .Include(i => i.Sales)
+        .Include(i => i.Courier)
+        .Include(i => i.Payment)
+        .Include(i => i.InvoiceDetails)
+        .FirstOrDefault(i => i.InvoiceNo == invoiceNo);
+
+    if (invoice == null)
+    {
+        ViewBag.Message = "Invoice not found";
+        return View("Index");
+    }
+
+    return View("Index", invoice); // assuming Index.cshtml accepts the invoice model
+}
+
+
+
+        [HttpGet]
+    public async Task<IActionResult> Index(string invoiceNo)
+    {
+        TrInvoice invoice = null;
+
+        if (!string.IsNullOrEmpty(invoiceNo))
         {
-            var invoices = await _context.TrInvoices
+            invoice = await _context.TrInvoices
                 .Include(i => i.Sales)
                 .Include(i => i.Courier)
                 .Include(i => i.Payment)
                 .Include(i => i.InvoiceDetails)
+                    .ThenInclude(d => d.Product)
+                .FirstOrDefaultAsync(i => i.InvoiceNo == invoiceNo);
+        }
+
+        return View(invoice); // Pass the invoice or null to the view
+    }
+
+    // === API ===
+    [HttpGet("api/invoice/{invoiceNo}")]
+    public async Task<IActionResult> GetInvoice(string invoiceNo)
+    {
+        var invoice = await _context.TrInvoices
+            .Include(i => i.Sales)
+            .Include(i => i.Courier)
+            .Include(i => i.Payment)
+            .Include(i => i.InvoiceDetails)
                 .ThenInclude(d => d.Product)
-                .ToListAsync();
+            .FirstOrDefaultAsync(i => i.InvoiceNo == invoiceNo);
 
-            return View(invoices);
-        }
+        if (invoice == null)
+            return NotFound(new { message = "Invoice not found" });
 
-        // GET: TrInvoice/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var invoice = await _context.TrInvoices
-                .Include(i => i.Sales)
-                .Include(i => i.Courier)
-                .Include(i => i.Payment)
-                .Include(i => i.InvoiceDetails)
-                .ThenInclude(d => d.Product)
-                .FirstOrDefaultAsync(m => m.InvoiceNo == id);
-
-            if (invoice == null)
-                return NotFound();
-
-            return View(invoice);
-        }
-
-        // GET: TrInvoice/Create
-        public IActionResult Create()
-        {
-            PopulateDropdowns();
-            return View();
-        }
-
-        // POST: TrInvoice/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TrInvoice invoice)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(invoice);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-            PopulateDropdowns();
-            return View(invoice);
-        }
-
-        // GET: TrInvoice/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var invoice = await _context.TrInvoices
-                .Include(i => i.InvoiceDetails)
-                .FirstOrDefaultAsync(i => i.InvoiceNo == id);
-
-            if (invoice == null)
-                return NotFound();
-
-            PopulateDropdowns();
-            return View(invoice);
-        }
-
-        // POST: TrInvoice/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, TrInvoice invoice)
-        {
-            if (id != invoice.InvoiceNo)
-                return NotFound();
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    // Remove existing details first
-                    var existingDetails = _context.TrInvoiceDetails.Where(d => d.InvoiceNo == id);
-                    _context.TrInvoiceDetails.RemoveRange(existingDetails);
-
-                    // Update main invoice
-                    _context.Update(invoice);
-
-                    // Re-add new details
-                    if (invoice.InvoiceDetails != null)
-                    {
-                        foreach (var detail in invoice.InvoiceDetails)
-                        {
-                            _context.TrInvoiceDetails.Add(detail);
-                        }
-                    }
-
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TrInvoiceExists(invoice.InvoiceNo))
-                        return NotFound();
-                    else
-                        throw;
-                }
-                return RedirectToAction(nameof(Index));
-            }
-
-            PopulateDropdowns();
-            return View(invoice);
-        }
-
-        // GET: TrInvoice/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var invoice = await _context.TrInvoices
-                .Include(i => i.Sales)
-                .Include(i => i.Courier)
-                .Include(i => i.Payment)
-                .FirstOrDefaultAsync(m => m.InvoiceNo == id);
-
-            if (invoice == null)
-                return NotFound();
-
-            return View(invoice);
-        }
-
-        // POST: TrInvoice/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var invoice = await _context.TrInvoices
-                .Include(i => i.InvoiceDetails)
-                .FirstOrDefaultAsync(i => i.InvoiceNo == id);
-
-            if (invoice != null)
-            {
-                _context.TrInvoiceDetails.RemoveRange(invoice.InvoiceDetails);
-                _context.TrInvoices.Remove(invoice);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool TrInvoiceExists(string id)
-        {
-            return _context.TrInvoices.Any(e => e.InvoiceNo == id);
-        }
-
-        private void PopulateDropdowns()
-        {
-            ViewData["CourierID"] = new SelectList(_context.MsCouriers, "CourierID", "CourierName");
-            ViewData["SalesID"] = new SelectList(_context.MsSales, "SalesID", "SalesName");
-            ViewData["PaymentType"] = new SelectList(_context.MsPayments, "PaymentID", "PaymentName");
-            ViewData["Products"] = new SelectList(_context.MsProducts, "ProductID", "ProductName");
-        }
+        return Ok(invoice);
+    }
     }
 }

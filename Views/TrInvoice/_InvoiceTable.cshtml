@@ -1,4 +1,9 @@
- <!-- Table Section -->
+@model IEnumerable<InvoiceApp.Models.TrInvoiceDetail>
+
+@if (Model != null && Model.Any())
+{
+
+     <!-- Table Section -->
         <div class="row mt-4">
             <div class="col-12 d-flex justify-content-center">
                 <div style="width: 97%;"> 
@@ -13,20 +18,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="border: 1px solid black;">Sample Product 1</td>
-                                <td style="border: 1px solid black;">2.5</td>
-                                <td style="border: 1px solid black;">3</td>
-                                <td style="border: 1px solid black;">$10.00</td>
-                                <td style="border: 1px solid black;">$30.00</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black;">Sample Product 2</td>
-                                <td style="border: 1px solid black;">1.0</td>
-                                <td style="border: 1px solid black;">5</td>
-                                <td style="border: 1px solid black;">$7.00</td>
-                                <td style="border: 1px solid black;">$35.00</td>
-                            </tr>
+                             @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="border: 1px solid black;">@item.Product?.ProductName</td>
+                                        <td style="border: 1px solid black;">@item.Weight</td>
+                                        <td style="border: 1px solid black;">@item.Qty</td>
+                                        <td style="border: 1px solid black;">@item.Price.ToString("C")</td>
+                                        <td style="border: 1px solid black;">@(item.Qty * item.Price).ToString("C")</td>
+                                    </tr>
+                                }
                             <!-- Total Section -->
                             <tr>
                                 <td style="border: none;"></td>
@@ -49,9 +50,13 @@
                                 <td style="text-align: left; font-weight: bold; border: none;">Total</td>
                                 <td style="text-align: right; font-weight: bold; border: none;">9999999</td>
                             </tr>
+
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
         <!-- END Table Section -->
+
+}
