@@ -1,47 +1,221 @@
-@model IEnumerable<InvoiceApp.Models.TrInvoice>
 @{
-    ViewData["Title"] = "Invoice List";
+    Layout = null;
 }
 
-<h2>Invoices</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Invoice Form with Detail Section</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">+ New Invoice</a>
-</p>
-
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Invoice No</th>
-            <th>Date</th>
-            <th>Invoice To</th>
-            <th>Courier</th>
-            <th>Sales</th>
-            <th>Payment</th>
-            <th>Courier Fee</th>
-            <th>Total</th>
-            <th style="width: 150px;">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            var total = item.InvoiceDetails?.Sum(d => d.Qty * d.Price) ?? 0;
-            <tr>
-                <td>@item.InvoiceNo</td>
-                <td>@item.InvoiceDate.ToString("yyyy-MM-dd")</td>
-                <td>@item.InvoiceTo</td>
-                <td>@item.Courier?.CourierName</td>
-                <td>@item.Sales?.SalesName</td>
-                <td>@item.Payment?.PaymentName</td>
-                <td>@item.CourierFee.ToString("N0")</td>
-                <td>@(total + item.CourierFee).ToString("N0")</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.InvoiceNo" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.InvoiceNo" class="btn btn-sm btn-info">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.InvoiceNo" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
         }
-    </tbody>
-</table>
+
+        label {
+            font-weight: bold;
+            color: black;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+
+        input[type="text"] {
+            border: 2px solid skyblue;
+            padding: 5px 10px;
+            margin-right: 10px;
+        }
+
+        button {
+            border: 2px solid skyblue;
+            background-color: white;
+            color: black;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: skyblue;
+            color: white;
+        }
+
+        .custom-container-wrapper {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .custom-container {
+            border: 2px solid #ccc;
+            padding: 30px 20px 20px 20px;
+            border-radius: 10px;
+        }
+
+        .real-border-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: white;
+            padding: 0 10px;
+            color: blue;
+            font-weight: bold;
+        }
+
+        .form-inline .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Common sky blue border for all inputs/selects */
+.border-sky {
+    border: 2px solid skyblue !important;
+}
+
+/* Style dropdown arrow */
+.custom-select-sky {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D'10'%20height%3D'5'%20viewBox%3D'0%200%2010%205'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M0%200l5%205%205-5H0z'%20fill%3D'skyblue'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 10px 5px;
+    padding-right: 2rem;
+}
+
+.form-label-fixed {
+    width: 120px; 
+    font-weight: bold;
+    color: black;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Invoice Form: Label + Input + Button in one line -->
+        <form class="form-inline" method="post" action="/YourController/ViewInvoice">
+            <div class="form-group">
+                <label for="invoiceNo">No Invoice</label>
+                <input type="text" id="invoiceNo" name="invoiceNo" />
+                <button type="submit">View</button>
+            </div>
+        </form>
+
+        <!-- Container with Real Border Label -->
+        <div class="custom-container-wrapper">
+            <div class="real-border-label">Invoice Detail</div>
+            <div class="custom-container">
+                <div class="row">
+                    
+                    <div class="col-6">
+                        <form>
+                            <div class="form-group mb-3 d-flex align-items-center">
+                                <label class="form-label-fixed" for="invoiceDate">Invoice Date</label>
+                                <input type="date" id="invoiceDate" name="invoiceDate" class="form-control border-sky" />
+                            </div>
+
+                            <div class="form-group mb-3 d-flex align-items-start">
+                                <label class="form-label-fixed mt-2" for="toDescription">To</label>
+                                <textarea id="toDescription" name="toDescription" class="form-control border-sky" rows="3" style="resize: none;"></textarea>
+                            </div>
+
+
+                            <div class="form-group mb-3 d-flex align-items-center">
+                                <label class="form-label-fixed" for="salesName">Sales Name</label>
+                                <select id="salesName" name="salesName" class="form-control border-sky custom-select-sky">
+                                    <option selected disabled>Select Sales</option>
+                                    <option>John Doe</option>
+                                    <option>Jane Smith</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3 d-flex align-items-center">
+                                <label class="form-label-fixed" for="courier">Courir</label>
+                                <select id="courier" name="courier" class="form-control border-sky custom-select-sky">
+                                    <option selected disabled>Select Courier</option>
+                                    <option>JNE</option>
+                                    <option>SiCepat</option>
+                                </select>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                    <div class="col-6">
+                        <form>
+
+                            <div class="form-group mb-3 d-flex align-items-start">
+                                <label class="form-label-fixed mt-2" for="shipToDescription">Ship To</label>
+                                <textarea id="shipToDescription" name="shipToDescription" class="form-control border-sky" rows="3" style="resize: none;"></textarea>
+                            </div>
+
+
+                            <div class="form-group mb-3 d-flex align-items-center">
+                                <label class="form-label-fixed" for="paymentType">Payment Type</label>
+                                <select id="paymentType" name="paymentType" class="form-control border-sky custom-select-sky">
+                                    <option selected disabled>Select Sales</option>
+                                    <option>Cash</option>
+                                    <option>COD</option>
+                                </select>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Table Section in Full-Width Row -->
+        <div class="row mt-4">
+            <div class="col-12 d-flex justify-content-center">
+                <div style="width: 97%;"> 
+                    <table class="table table-bordered table-sm text-center" style="color: black; border-color: black;">
+                        <thead>
+                            <tr style="color: black; border-color: black;">
+                                <th style="width: 40%; border: 1px solid black; font-weight: normal;">Item</th>
+                                <th style="width: 15%; border: 1px solid black; font-weight: normal;">Weight (Kg)</th>
+                                <th style="width: 15%; border: 1px solid black; font-weight: normal;">QTY</th>
+                                <th style="width: 15%; border: 1px solid black; font-weight: normal;">Unit Price</th>
+                                <th style="width: 15%; border: 1px solid black; font-weight: normal;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black;">Sample Product 1</td>
+                                <td style="border: 1px solid black;">2.5</td>
+                                <td style="border: 1px solid black;">3</td>
+                                <td style="border: 1px solid black;">$10.00</td>
+                                <td style="border: 1px solid black;">$30.00</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;">Sample Product 2</td>
+                                <td style="border: 1px solid black;">1.0</td>
+                                <td style="border: 1px solid black;">5</td>
+                                <td style="border: 1px solid black;">$7.00</td>
+                                <td style="border: 1px solid black;">$35.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+</body>
+</html>
