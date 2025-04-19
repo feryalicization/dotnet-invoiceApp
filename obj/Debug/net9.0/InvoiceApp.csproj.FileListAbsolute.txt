@@ -477,4 +477,4 @@ C:\Users\feryc\OneDrive\Desktop\dotnet\InvoiceApp\bin\Debug\net9.0\Microsoft.Asp
 C:\Users\feryc\OneDrive\Desktop\dotnet\InvoiceApp\bin\Debug\net9.0\Microsoft.CodeAnalysis.Razor.dll
 C:\Users\feryc\OneDrive\Desktop\dotnet\InvoiceApp\obj\Debug\net9.0\InvoiceApp.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\feryc\OneDrive\Desktop\dotnet\InvoiceApp\obj\Debug\net9.0\InvoiceApp.sourcelink.json
-C:\Users\feryc\OneDrive\Desktop\dotnet\InvoiceApp\obj\Debug\net9.0\compressed\86wzbraic6-wfa8qxglc1.gz
+C:\Users\feryc\OneDrive\Desktop\dotnet\InvoiceApp\obj\Debug\net9.0\compressed\86wzbraic6-axs8xl1ha2.gz

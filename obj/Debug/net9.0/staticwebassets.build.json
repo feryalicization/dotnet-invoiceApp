@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Dxa1VU6UgzVrZMnBmPrGLw/KREQz/faapj94LSjSvBk=",
+  "Hash": "vJH6HogXUdu+rIVPa8kJtKspwvNwfi6xcoH/e0tprX8=",
   "Source": "InvoiceApp",
   "BasePath": "_content/InvoiceApp",
   "Mode": "Default",
@@ -248,12 +248,12 @@
       "OriginalItemSpec": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Identity": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-wfa8qxglc1.gz",
+      "Identity": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-axs8xl1ha2.gz",
       "SourceId": "InvoiceApp",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/InvoiceApp",
-      "RelativePath": "css/styles#[.{fingerprint=wfa8qxglc1}]?.css.gz",
+      "RelativePath": "css/styles#[.{fingerprint=axs8xl1ha2}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -262,8 +262,8 @@
       "RelatedAsset": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\wwwroot\\css\\styles.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "6ci75qnd9c",
-      "Integrity": "ltXG2CQsxG1NhOVvtfRvaL09auCXJ6QiJLtAMbIPa7c=",
+      "Fingerprint": "5ovggj8c9n",
+      "Integrity": "VcCIiFwyiR0tLoPygZeBMnuw6QxFgqs93InP5Y+/2Mw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\wwwroot\\css\\styles.css"
@@ -1459,8 +1459,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "wfa8qxglc1",
-      "Integrity": "JFtU9Oa7PMiOhnHZUD6Key4s0DKZK2vXgUG9WN8GWvY=",
+      "Fingerprint": "axs8xl1ha2",
+      "Integrity": "kjY5mPS3J8reywhHd/FvRurFgUIvrbzaKvWpWozRDhw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\styles.css"
@@ -3068,13 +3068,13 @@
       ]
     },
     {
-      "Route": "css/styles.css",
-      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-wfa8qxglc1.gz",
+      "Route": "css/styles.axs8xl1ha2.css",
+      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-axs8xl1ha2.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001381215470"
+          "Quality": "0.001373626374"
         }
       ],
       "ResponseHeaders": [
@@ -3084,19 +3084,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "723"
+          "Value": "727"
         },
         {
           "Name": "ETag",
-          "Value": "\"ltXG2CQsxG1NhOVvtfRvaL09auCXJ6QiJLtAMbIPa7c=\""
+          "Value": "\"VcCIiFwyiR0tLoPygZeBMnuw6QxFgqs93InP5Y+/2Mw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 19 Apr 2025 09:34:23 GMT"
+          "Value": "Sat, 19 Apr 2025 10:22:07 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -3112,18 +3112,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"JFtU9Oa7PMiOhnHZUD6Key4s0DKZK2vXgUG9WN8GWvY=\""
+          "Value": "W/\"kjY5mPS3J8reywhHd/FvRurFgUIvrbzaKvWpWozRDhw=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "axs8xl1ha2"
+        },
+        {
+          "Name": "label",
+          "Value": "css/styles.css"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-JFtU9Oa7PMiOhnHZUD6Key4s0DKZK2vXgUG9WN8GWvY="
+          "Value": "sha256-kjY5mPS3J8reywhHd/FvRurFgUIvrbzaKvWpWozRDhw="
         }
       ]
     },
     {
-      "Route": "css/styles.css",
+      "Route": "css/styles.axs8xl1ha2.css",
       "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\wwwroot\\css\\styles.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3141,121 +3149,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"JFtU9Oa7PMiOhnHZUD6Key4s0DKZK2vXgUG9WN8GWvY=\""
+          "Value": "\"kjY5mPS3J8reywhHd/FvRurFgUIvrbzaKvWpWozRDhw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 19 Apr 2025 09:34:23 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-JFtU9Oa7PMiOhnHZUD6Key4s0DKZK2vXgUG9WN8GWvY="
-        }
-      ]
-    },
-    {
-      "Route": "css/styles.css.gz",
-      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-wfa8qxglc1.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "723"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ltXG2CQsxG1NhOVvtfRvaL09auCXJ6QiJLtAMbIPa7c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 19 Apr 2025 09:34:23 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-ltXG2CQsxG1NhOVvtfRvaL09auCXJ6QiJLtAMbIPa7c="
-        }
-      ]
-    },
-    {
-      "Route": "css/styles.wfa8qxglc1.css",
-      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-wfa8qxglc1.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.001381215470"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "723"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ltXG2CQsxG1NhOVvtfRvaL09auCXJ6QiJLtAMbIPa7c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 19 Apr 2025 09:34:23 GMT"
+          "Value": "Sat, 19 Apr 2025 10:22:07 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"JFtU9Oa7PMiOhnHZUD6Key4s0DKZK2vXgUG9WN8GWvY=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "wfa8qxglc1"
+          "Value": "axs8xl1ha2"
         },
         {
           "Name": "label",
@@ -3263,13 +3171,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-JFtU9Oa7PMiOhnHZUD6Key4s0DKZK2vXgUG9WN8GWvY="
+          "Value": "sha256-kjY5mPS3J8reywhHd/FvRurFgUIvrbzaKvWpWozRDhw="
         }
       ]
     },
     {
-      "Route": "css/styles.wfa8qxglc1.css",
-      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\wwwroot\\css\\styles.css",
+      "Route": "css/styles.axs8xl1ha2.css.gz",
+      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-axs8xl1ha2.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3278,7 +3186,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1680"
+          "Value": "727"
         },
         {
           "Name": "Content-Type",
@@ -3286,56 +3194,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"JFtU9Oa7PMiOhnHZUD6Key4s0DKZK2vXgUG9WN8GWvY=\""
+          "Value": "\"VcCIiFwyiR0tLoPygZeBMnuw6QxFgqs93InP5Y+/2Mw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 19 Apr 2025 09:34:23 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "wfa8qxglc1"
-        },
-        {
-          "Name": "label",
-          "Value": "css/styles.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-JFtU9Oa7PMiOhnHZUD6Key4s0DKZK2vXgUG9WN8GWvY="
-        }
-      ]
-    },
-    {
-      "Route": "css/styles.wfa8qxglc1.css.gz",
-      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-wfa8qxglc1.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "723"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ltXG2CQsxG1NhOVvtfRvaL09auCXJ6QiJLtAMbIPa7c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 19 Apr 2025 09:34:23 GMT"
+          "Value": "Sat, 19 Apr 2025 10:22:07 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3353,7 +3216,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "wfa8qxglc1"
+          "Value": "axs8xl1ha2"
         },
         {
           "Name": "label",
@@ -3361,7 +3224,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ltXG2CQsxG1NhOVvtfRvaL09auCXJ6QiJLtAMbIPa7c="
+          "Value": "sha256-VcCIiFwyiR0tLoPygZeBMnuw6QxFgqs93InP5Y+/2Mw="
+        }
+      ]
+    },
+    {
+      "Route": "css/styles.css",
+      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-axs8xl1ha2.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001373626374"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "727"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VcCIiFwyiR0tLoPygZeBMnuw6QxFgqs93InP5Y+/2Mw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 19 Apr 2025 10:22:07 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"kjY5mPS3J8reywhHd/FvRurFgUIvrbzaKvWpWozRDhw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kjY5mPS3J8reywhHd/FvRurFgUIvrbzaKvWpWozRDhw="
+        }
+      ]
+    },
+    {
+      "Route": "css/styles.css",
+      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\wwwroot\\css\\styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1680"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kjY5mPS3J8reywhHd/FvRurFgUIvrbzaKvWpWozRDhw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 19 Apr 2025 10:22:07 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kjY5mPS3J8reywhHd/FvRurFgUIvrbzaKvWpWozRDhw="
+        }
+      ]
+    },
+    {
+      "Route": "css/styles.css.gz",
+      "AssetFile": "C:\\Users\\feryc\\OneDrive\\Desktop\\dotnet\\InvoiceApp\\obj\\Debug\\net9.0\\compressed\\86wzbraic6-axs8xl1ha2.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "727"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VcCIiFwyiR0tLoPygZeBMnuw6QxFgqs93InP5Y+/2Mw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 19 Apr 2025 10:22:07 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VcCIiFwyiR0tLoPygZeBMnuw6QxFgqs93InP5Y+/2Mw="
         }
       ]
     },

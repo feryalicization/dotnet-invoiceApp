@@ -12,13 +12,13 @@ label {
 }
 
 input[type="text"] {
-    border: 2px solid skyblue;
+    border: 2px solid #96B9DC;
     padding: 5px 10px;
     margin-right: 10px;
 }
 
 button {
-    border: 2px solid skyblue;
+    border: 2px solid #96B9DC;
     background-color: white;
     color: black;
     padding: 5px 15px;
@@ -26,7 +26,7 @@ button {
 }
 
 button:hover {
-    background-color: skyblue;
+    background-color: #96B9DC;
     color: white;
 }
 
@@ -58,7 +58,7 @@ button:hover {
 
 /* Common sky blue border for all inputs/selects */
 .border-sky {
-border: 2px solid skyblue !important;
+border: 2px solid #96B9DC !important;
 }
 
 /* Style dropdown arrow */
@@ -66,7 +66,7 @@ border: 2px solid skyblue !important;
 -webkit-appearance: none;
 -moz-appearance: none;
 appearance: none;
-background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D'10'%20height%3D'5'%20viewBox%3D'0%200%2010%205'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M0%200l5%205%205-5H0z'%20fill%3D'skyblue'/%3E%3C/svg%3E");
+background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D'10'%20height%3D'5'%20viewBox%3D'0%200%2010%205'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M0%200l5%205%205-5H0z'%20fill%3D'#96B9DC'/%3E%3C/svg%3E");
 background-repeat: no-repeat;
 background-position: right 0.75rem center;
 background-size: 10px 5px;
