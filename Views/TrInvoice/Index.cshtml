@@ -8,97 +8,13 @@
     <meta charset="utf-8" />
     <title>Invoice Form with Detail Section</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
-        label {
-            font-weight: bold;
-            color: black;
-            margin-right: 10px;
-            white-space: nowrap;
-        }
-
-        input[type="text"] {
-            border: 2px solid skyblue;
-            padding: 5px 10px;
-            margin-right: 10px;
-        }
-
-        button {
-            border: 2px solid skyblue;
-            background-color: white;
-            color: black;
-            padding: 5px 15px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: skyblue;
-            color: white;
-        }
-
-        .custom-container-wrapper {
-            position: relative;
-            margin-top: 40px;
-        }
-
-        .custom-container {
-            border: 2px solid #ccc;
-            padding: 30px 20px 20px 20px;
-            border-radius: 10px;
-        }
-
-        .real-border-label {
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            background-color: white;
-            padding: 0 10px;
-            color: blue;
-            font-weight: bold;
-        }
-
-        .form-inline .form-group {
-            display: flex;
-            align-items: center;
-        }
-
-        /* Common sky blue border for all inputs/selects */
-.border-sky {
-    border: 2px solid skyblue !important;
-}
-
-/* Style dropdown arrow */
-.custom-select-sky {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D'10'%20height%3D'5'%20viewBox%3D'0%200%2010%205'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M0%200l5%205%205-5H0z'%20fill%3D'skyblue'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 10px 5px;
-    padding-right: 2rem;
-}
-
-.form-label-fixed {
-    width: 120px; 
-    font-weight: bold;
-    color: black;
-    margin-right: 10px;
-    white-space: nowrap;
-}
-
-
-    </style>
+    <link href="~/css/styles.css" rel="stylesheet" type="text/css" />
+    
 </head>
 <body>
 
     <div class="container">
-        <!-- Invoice Form: Label + Input + Button in one line -->
+        <!-- Invoice Form: Label -->
         <form class="form-inline" method="post" action="/YourController/ViewInvoice">
             <div class="form-group">
                 <label for="invoiceNo">No Invoice</label>
@@ -106,8 +22,9 @@
                 <button type="submit">View</button>
             </div>
         </form>
+        <!-- END Invoice Form: Label -->
 
-        <!-- Container with Real Border Label -->
+        <!-- Invoice Detail -->
         <div class="custom-container-wrapper">
             <div class="real-border-label">Invoice Detail</div>
             <div class="custom-container">
@@ -173,14 +90,15 @@
 
             </div>
         </div>
+        <!-- END Invoice Detail -->
 
-        <!-- Table Section in Full-Width Row -->
+        <!-- Table Section -->
         <div class="row mt-4">
             <div class="col-12 d-flex justify-content-center">
                 <div style="width: 97%;"> 
-                    <table class="table table-bordered table-sm text-center" style="color: black; border-color: black;">
+                    <table class="table table-sm text-center" style="color: black; border-color: black;">
                         <thead>
-                            <tr style="color: black; border-color: black;">
+                            <tr style="color: black;">
                                 <th style="width: 40%; border: 1px solid black; font-weight: normal;">Item</th>
                                 <th style="width: 15%; border: 1px solid black; font-weight: normal;">Weight (Kg)</th>
                                 <th style="width: 15%; border: 1px solid black; font-weight: normal;">QTY</th>
@@ -203,11 +121,37 @@
                                 <td style="border: 1px solid black;">$7.00</td>
                                 <td style="border: 1px solid black;">$35.00</td>
                             </tr>
+                            <!-- Total Section -->
+                            <tr>
+                                <td style="border: none;"></td>
+                                <td style="border: none;"></td>
+                                <td style="border: none;"></td>
+                                <td style="text-align: left; font-weight: bold; border: none;">Subtotal</td>
+                                <td style="text-align: right; font-weight: bold; border: none;">9999</td>
+                            </tr>
+                            <tr>
+                                <td style="border: none;"></td>
+                                <td style="border: none;"></td>
+                                <td style="border: none;"></td>
+                                <td style="text-align: left; font-weight: bold; border: none;">Courier Fee</td>
+                                <td style="text-align: right; font-weight: bold; border: none;">9999</td>
+                            </tr>
+                            <tr>
+                                <td style="border: none;"></td>
+                                <td style="border: none;"></td>
+                                <td style="border: none;"></td>
+                                <td style="text-align: left; font-weight: bold; border: none;">Total</td>
+                                <td style="text-align: right; font-weight: bold; border: none;">9999999</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        <!-- END Table Section -->
+
+        <button type="submit">Save</button>
+
 
 
 
