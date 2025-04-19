@@ -1,6 +1,17 @@
-@model IEnumerable<InvoiceApp.Models.TrInvoiceDetail>
+@model InvoiceApp.Models.TrInvoice
+@{
 
-@if (Model != null && Model.Any())
+    var details = Model.InvoiceDetails;
+    var courierFee = Model?.CourierFee ?? 0m;
+    var subtotal = details.Sum(d => d.Qty * d.Price);
+    var totalWeight = details.Sum(d => d.Weight * d.Qty);
+    var courierTotal = courierFee * (decimal)totalWeight;
+    var grandTotal = subtotal + courierTotal;
+
+}
+
+
+@if (details != null && details.Any())
 {
 
      <!-- Table Section -->
@@ -18,14 +29,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                             @foreach (var item in Model)
+                             @foreach (var item in details)
                                 {
                                     <tr>
                                         <td style="border: 1px solid black;">@item.Product?.ProductName</td>
                                         <td style="border: 1px solid black;">@item.Weight</td>
                                         <td style="border: 1px solid black;">@item.Qty</td>
                                         <td style="border: 1px solid black;">@item.Price.ToString("C")</td>
-                                        <td style="border: 1px solid black;">@(item.Qty * item.Price).ToString("C")</td>
+                                        <td style="border: 1px solid black;">@(Math.Round(item.Qty * item.Price, 2).ToString("C"))</td>
                                     </tr>
                                 }
                             <!-- Total Section -->
@@ -34,24 +45,22 @@
                                 <td style="border: none;"></td>
                                 <td style="border: none;"></td>
                                 <td style="text-align: left; font-weight: bold; border: none;">Subtotal</td>
-                                <td style="text-align: right; font-weight: bold; border: none;">9999</td>
+                                <td style="text-align: right; font-weight: bold; border: none;">@subtotal.ToString("C")</td>
                             </tr>
                             <tr>
                                 <td style="border: none;"></td>
                                 <td style="border: none;"></td>
                                 <td style="border: none;"></td>
                                 <td style="text-align: left; font-weight: bold; border: none;">Courier Fee</td>
-                                <td style="text-align: right; font-weight: bold; border: none;">9999</td>
+                                <td style="text-align: right; font-weight: bold; border: none;">@courierTotal.ToString("C")</td>
                             </tr>
                             <tr>
                                 <td style="border: none;"></td>
                                 <td style="border: none;"></td>
                                 <td style="border: none;"></td>
                                 <td style="text-align: left; font-weight: bold; border: none;">Total</td>
-                                <td style="text-align: right; font-weight: bold; border: none;">9999999</td>
+                                <td style="text-align: right; font-weight: bold; border: none;">@grandTotal.ToString("C")</td>
                             </tr>
-
-                            
                         </tbody>
                     </table>
                 </div>

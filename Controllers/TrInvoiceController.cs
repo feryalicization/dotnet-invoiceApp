@@ -20,7 +20,7 @@ public IActionResult ViewInvoice(string invoiceNo)
 {
     if (string.IsNullOrWhiteSpace(invoiceNo))
     {
-        return View("Index"); // Or redirect to Index
+        return View("Index"); 
     }
 
     var invoice = _context.TrInvoices
@@ -36,7 +36,7 @@ public IActionResult ViewInvoice(string invoiceNo)
         return View("Index");
     }
 
-    return View("Index", invoice); // assuming Index.cshtml accepts the invoice model
+    return View("Index", invoice); 
 }
 
 
@@ -57,7 +57,7 @@ public IActionResult ViewInvoice(string invoiceNo)
                 .FirstOrDefaultAsync(i => i.InvoiceNo == invoiceNo);
         }
 
-        return View(invoice); // Pass the invoice or null to the view
+        return View(invoice); 
     }
 
     // === API ===
