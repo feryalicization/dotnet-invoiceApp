@@ -1,0 +1,132 @@
+@model InvoiceApp.Models.TrInvoice
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Create Invoice";
+}
+
+<h2>Create Invoice</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="InvoiceNo" class="control-label"></label>
+        <input asp-for="InvoiceNo" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="InvoiceDate" class="control-label"></label>
+        <input asp-for="InvoiceDate" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="InvoiceTo" class="control-label"></label>
+        <textarea asp-for="InvoiceTo" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ShipTo" class="control-label"></label>
+        <textarea asp-for="ShipTo" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SalesID" class="control-label"></label>
+        <select asp-for="SalesID" class="form-control" asp-items="ViewBag.SalesID"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CourierID" class="control-label"></label>
+        <select asp-for="CourierID" class="form-control" asp-items="ViewBag.CourierID" onchange="updateCourierFee()"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PaymentType" class="control-label"></label>
+        <select asp-for="PaymentType" class="form-control" asp-items="ViewBag.PaymentType"></select>
+    </div>
+
+    <hr />
+    <h4>Products</h4>
+
+    <table class="table" id="productTable">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Weight</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+                <th><button type="button" class="btn btn-success" onclick="addRow()">+</button></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <label>Total Courier Fee:</label>
+        <input type="text" name="CourierFee" id="CourierFee" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Grand Total:</label>
+        <input type="text" id="GrandTotal" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Invoice</button>
+</form>
+
+@section Scripts {
+    <script>
+        let productIndex = 0;
+
+        function addRow() {
+            const row = `
+                <tr>
+                    <td>
+                        <select name="InvoiceDetails[${productIndex}].ProductID" class="form-control">
+                            @foreach (var p in ViewBag.Products as List<SelectListItem>)
+                            {
+                                <option value="@p.Value">@p.Text</option>
+                            }
+                        </select>
+                    </td>
+                    <td><input type="number" name="InvoiceDetails[${productIndex}].Weight" class="form-control" oninput="recalculate()" /></td>
+                    <td><input type="number" name="InvoiceDetails[${productIndex}].Qty" class="form-control" oninput="recalculate()" /></td>
+                    <td><input type="number" name="InvoiceDetails[${productIndex}].Price" class="form-control" oninput="recalculate()" /></td>
+                    <td><input type="text" class="form-control subtotal" readonly /></td>
+                    <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">-</button></td>
+                </tr>`;
+            $('#productTable tbody').append(row);
+            productIndex++;
+        }
+
+        function removeRow(button) {
+            $(button).closest('tr').remove();
+            recalculate();
+        }
+
+        function recalculate() {
+            let grandTotal = 0;
+            let totalWeight = 0;
+
+            $('#productTable tbody tr').each(function () {
+                const qty = parseFloat($(this).find('input[name*=".Qty"]').val()) || 0;
+                const weight = parseFloat($(this).find('input[name*=".Weight"]').val()) || 0;
+                const price = parseFloat($(this).find('input[name*=".Price"]').val()) || 0;
+
+                const subtotal = qty * price;
+                $(this).find('.subtotal').val(subtotal.toFixed(2));
+
+                grandTotal += subtotal;
+                totalWeight += weight * qty;
+            });
+
+            $('#GrandTotal').val(grandTotal.toFixed(2));
+            updateCourierFee(totalWeight);
+        }
+
+        function updateCourierFee(totalWeight = null) {
+            // placeholder: you'd call an API endpoint to get fee based on courier & totalWeight
+            const fakeCourierFee = 25000; // replace with API call logic
+            $('#CourierFee').val(fakeCourierFee);
+        }
+    </script>
+}

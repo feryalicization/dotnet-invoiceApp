@@ -33,6 +33,6 @@ app.UseAuthorization();
 // ✅ Routing default controller
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=TrInvoice}/{action=Index}/{id?}");
 
 app.Run();

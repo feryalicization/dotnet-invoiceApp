@@ -1,0 +1,47 @@
+@model IEnumerable<InvoiceApp.Models.TrInvoice>
+@{
+    ViewData["Title"] = "Invoice List";
+}
+
+<h2>Invoices</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ New Invoice</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Invoice No</th>
+            <th>Date</th>
+            <th>Invoice To</th>
+            <th>Courier</th>
+            <th>Sales</th>
+            <th>Payment</th>
+            <th>Courier Fee</th>
+            <th>Total</th>
+            <th style="width: 150px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var total = item.InvoiceDetails?.Sum(d => d.Qty * d.Price) ?? 0;
+            <tr>
+                <td>@item.InvoiceNo</td>
+                <td>@item.InvoiceDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.InvoiceTo</td>
+                <td>@item.Courier?.CourierName</td>
+                <td>@item.Sales?.SalesName</td>
+                <td>@item.Payment?.PaymentName</td>
+                <td>@item.CourierFee.ToString("N0")</td>
+                <td>@(total + item.CourierFee).ToString("N0")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.InvoiceNo" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.InvoiceNo" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.InvoiceNo" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
