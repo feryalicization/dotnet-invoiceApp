@@ -15,90 +15,119 @@ namespace InvoiceApp.Controllers
             _context = context;
         }
 
-    [HttpPost]
-    public IActionResult ViewInvoice(string invoiceNo)
-    {
-        if (string.IsNullOrWhiteSpace(invoiceNo))
+        [HttpPost]
+        public IActionResult ViewInvoice(string invoiceNo)
         {
-            return View("Index"); 
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+            {
+                return View("Index"); 
+            }
+
+            var invoice = _context.TrInvoices
+                .Include(i => i.Sales)
+                .Include(i => i.Courier)
+                .Include(i => i.Payment)
+                .Include(i => i.InvoiceDetails)
+                .FirstOrDefault(i => i.InvoiceNo == invoiceNo);
+
+            if (invoice == null)
+            {
+                ViewBag.Message = "Invoice not found";
+                return View("Index");
+            }
+
+            return View("Index", invoice); 
         }
 
-        var invoice = _context.TrInvoices
-            .Include(i => i.Sales)
-            .Include(i => i.Courier)
-            .Include(i => i.Payment)
-            .Include(i => i.InvoiceDetails)
-            .FirstOrDefault(i => i.InvoiceNo == invoiceNo);
 
-        if (invoice == null)
+
+        [HttpGet]
+        public async Task<IActionResult> Index(string invoiceNo)
         {
-            ViewBag.Message = "Invoice not found";
-            return View("Index");
+            TrInvoice invoice = null;
+
+            if (!string.IsNullOrEmpty(invoiceNo))
+            {
+                invoice = await _context.TrInvoices
+                    .Include(i => i.Sales)
+                    .Include(i => i.Courier)
+                    .Include(i => i.Payment)
+                    .Include(i => i.InvoiceDetails)
+                        .ThenInclude(d => d.Product)
+                    .FirstOrDefaultAsync(i => i.InvoiceNo == invoiceNo);
+            }
+
+            return View(invoice); 
         }
 
-        return View("Index", invoice); 
-    }
-
-
-
-    [HttpGet]
-    public async Task<IActionResult> Index(string invoiceNo)
-    {
-        TrInvoice invoice = null;
-
-        if (!string.IsNullOrEmpty(invoiceNo))
+        [HttpPost]
+        public IActionResult UpdateInvoiceDetails(TrInvoice model)
         {
-            invoice = await _context.TrInvoices
+            if (model.InvoiceDetails != null && model.InvoiceDetails.Any())
+            {
+                foreach (var detail in model.InvoiceDetails)
+                {
+                    var existing = _context.TrInvoiceDetails.FirstOrDefault(x => x.InvoiceNo == detail.InvoiceNo);
+                    if (existing != null)
+                    {
+                        existing.Qty = detail.Qty;
+                        existing.Weight = detail.Weight;
+                        existing.Price = detail.Price;
+                    }
+                }
+
+                _context.SaveChanges();
+            }
+
+            return Redirect("/?invoiceNo=" + model.InvoiceNo);
+        }
+
+
+        [HttpGet("api/invoice/{invoiceNo}")]
+        public async Task<IActionResult> GetInvoice(string invoiceNo)
+        {
+            var invoice = await _context.TrInvoices
                 .Include(i => i.Sales)
                 .Include(i => i.Courier)
                 .Include(i => i.Payment)
                 .Include(i => i.InvoiceDetails)
                     .ThenInclude(d => d.Product)
                 .FirstOrDefaultAsync(i => i.InvoiceNo == invoiceNo);
+
+            if (invoice == null)
+                return NotFound(new { message = "Invoice not found" });
+
+            return Ok(invoice);
         }
 
-        return View(invoice); 
-    }
-
-    [HttpPost]
-    public IActionResult UpdateInvoiceDetails(TrInvoice model)
-    {
-        if (model.InvoiceDetails != null && model.InvoiceDetails.Any())
+        [HttpGet]
+        public IActionResult Create()
         {
-            foreach (var detail in model.InvoiceDetails)
+            var model = new TrInvoice
             {
-                var existing = _context.TrInvoiceDetails.FirstOrDefault(x => x.InvoiceNo == detail.InvoiceNo);
-                if (existing != null)
-                {
-                    existing.Qty = detail.Qty;
-                    existing.Weight = detail.Weight;
-                    existing.Price = detail.Price;
-                }
+                InvoiceDate = DateTime.Today,
+                InvoiceDetails = new List<TrInvoiceDetail> { new TrInvoiceDetail() }
+            };
+
+            return View(model); // This renders Views/TrInvoice/Create.cshtml
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Create(TrInvoice model)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.TrInvoices.Add(model);
+                _context.SaveChanges();
+                return RedirectToAction("Details", new { id = model.InvoiceNo }); // Redirect to the details view after creating
             }
 
-            _context.SaveChanges();
+            // If there are validation errors, return to the Create view with the model so the user can correct them
+            return View(model);
         }
 
-        return Redirect("/?invoiceNo=" + model.InvoiceNo);
-    }
-
-
-    [HttpGet("api/invoice/{invoiceNo}")]
-    public async Task<IActionResult> GetInvoice(string invoiceNo)
-    {
-        var invoice = await _context.TrInvoices
-            .Include(i => i.Sales)
-            .Include(i => i.Courier)
-            .Include(i => i.Payment)
-            .Include(i => i.InvoiceDetails)
-                .ThenInclude(d => d.Product)
-            .FirstOrDefaultAsync(i => i.InvoiceNo == invoiceNo);
-
-        if (invoice == null)
-            return NotFound(new { message = "Invoice not found" });
-
-        return Ok(invoice);
-    }
 
     
     }

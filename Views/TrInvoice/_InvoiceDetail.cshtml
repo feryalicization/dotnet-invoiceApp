@@ -1,51 +1,51 @@
  <div class="custom-container-wrapper">
-            <div class="real-border-label">Invoice Detail</div>
-            <div class="custom-container">
-                <div class="row">
-                    <div class="col-6">
-                        <form>
-                            <div class="form-group mb-3 d-flex align-items-center">
-                                <label class="form-label-fixed" for="invoiceDate">Invoice Date</label>
-                                <input type="date" id="invoiceDate" name="invoiceDate" class="form-control border-sky" 
-                                       value="@Model.InvoiceDate.ToString("yyyy-MM-dd")" disabled />
-                            </div>
-
-                            <div class="form-group mb-3 d-flex align-items-start">
-                                <label class="form-label-fixed mt-2" for="toDescription">To</label>
-                                <textarea id="toDescription" name="toDescription" class="form-control border-sky" rows="3" style="resize: none;" disabled>@Model.InvoiceTo</textarea>
-                            </div>
-
-                            <div class="form-group mb-3 d-flex align-items-center">
-                                <label class="form-label-fixed" for="salesName">Sales Name</label>
-                                <select id="salesName" name="salesName" class="form-control border-sky custom-select-sky" disabled>
-                                    <option selected>@Model.Sales?.SalesName</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group mb-3 d-flex align-items-center">
-                                <label class="form-label-fixed" for="courier">Courier</label>
-                                <select id="courier" name="courier" class="form-control border-sky custom-select-sky" disabled>
-                                    <option selected>@Model.Courier?.CourierName</option>
-                                </select>
-                            </div>
-                        </form>
+    <div class="real-border-label">Invoice Detail</div>
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-6">
+                <form>
+                    <div class="form-group mb-3 d-flex align-items-center">
+                        <label class="form-label-fixed" for="invoiceDate">Invoice Date</label>
+                        <input type="date" id="invoiceDate" name="invoiceDate" class="form-control border-sky" 
+                                value="@Model.InvoiceDate.ToString("yyyy-MM-dd")" disabled />
                     </div>
 
-                    <div class="col-6">
-                        <form>
-                            <div class="form-group mb-3 d-flex align-items-start">
-                                <label class="form-label-fixed mt-2" for="shipToDescription">Ship To</label>
-                                <textarea id="shipToDescription" name="shipToDescription" class="form-control border-sky" rows="3" style="resize: none;" disabled>@Model.ShipTo</textarea>
-                            </div>
-
-                            <div class="form-group mb-3 d-flex align-items-center">
-                                <label class="form-label-fixed" for="paymentType">Payment Type</label>
-                                <select id="paymentType" name="paymentType" class="form-control border-sky custom-select-sky" disabled>
-                                    <option selected>@Model.Payment?.PaymentName</option>
-                                </select>
-                            </div>
-                        </form>
+                    <div class="form-group mb-3 d-flex align-items-start">
+                        <label class="form-label-fixed mt-2" for="toDescription">To</label>
+                        <textarea id="toDescription" name="toDescription" class="form-control border-sky" rows="3" style="resize: none;" disabled>@Model.InvoiceTo</textarea>
                     </div>
-                </div>
+
+                    <div class="form-group mb-3 d-flex align-items-center">
+                        <label class="form-label-fixed" for="salesName">Sales Name</label>
+                        <select id="salesName" name="salesName" class="form-control border-sky custom-select-sky" disabled>
+                            <option selected>@Model.Sales?.SalesName</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3 d-flex align-items-center">
+                        <label class="form-label-fixed" for="courier">Courier</label>
+                        <select id="courier" name="courier" class="form-control border-sky custom-select-sky" disabled>
+                            <option selected>@Model.Courier?.CourierName</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-6">
+                <form>
+                    <div class="form-group mb-3 d-flex align-items-start">
+                        <label class="form-label-fixed mt-2" for="shipToDescription">Ship To</label>
+                        <textarea id="shipToDescription" name="shipToDescription" class="form-control border-sky" rows="3" style="resize: none;" disabled>@Model.ShipTo</textarea>
+                    </div>
+
+                    <div class="form-group mb-3 d-flex align-items-center">
+                        <label class="form-label-fixed" for="paymentType">Payment Type</label>
+                        <select id="paymentType" name="paymentType" class="form-control border-sky custom-select-sky" disabled>
+                            <option selected>@Model.Payment?.PaymentName</option>
+                        </select>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+</div>

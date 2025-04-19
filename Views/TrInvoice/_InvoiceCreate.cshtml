@@ -1,0 +1,93 @@
+@model InvoiceApp.Models.TrInvoice
+@using System.Linq
+@using InvoiceApp.Models
+
+@{
+    var details = Model.InvoiceDetails?.ToList() ?? new List<TrInvoiceDetail>();
+}
+
+<h3>Create Invoice</h3>
+
+<form method="post">
+    <div class="form-group">
+        <label for="InvoiceNo">Invoice No</label>
+        <input type="text" id="InvoiceNo" name="InvoiceNo" class="form-control" value="@Model.InvoiceNo" />
+    </div>
+
+    <div class="form-group">
+        <label for="InvoiceDate">Invoice Date</label>
+        <input type="date" id="InvoiceDate" name="InvoiceDate" class="form-control" value="@Model.InvoiceDate.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <div class="form-group">
+        <label for="InvoiceTo">Invoice To</label>
+        <input type="text" id="InvoiceTo" name="InvoiceTo" class="form-control" value="@Model.InvoiceTo" />
+    </div>
+
+    <div class="form-group">
+        <label for="ShipTo">Ship To</label>
+        <input type="text" id="ShipTo" name="ShipTo" class="form-control" value="@Model.ShipTo" />
+    </div>
+
+    <!-- Invoice Details Table -->
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Weight (Kg)</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="details-body">
+            @for (var i = 0; i < details.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <input type="text" name="InvoiceDetails[@i].Product" class="form-control" value="@details[i].Product" />
+                    </td>
+                    <td>
+                        <input type="number" name="InvoiceDetails[@i].Weight" class="form-control" value="@details[i].Weight" />
+                    </td>
+                    <td>
+                        <input type="number" name="InvoiceDetails[@i].Qty" class="form-control" value="@details[i].Qty" />
+                    </td>
+                    <td>
+                        <input type="number" name="InvoiceDetails[@i].Price" class="form-control" value="@details[i].Price" />
+                    </td>
+                    <td>
+                        @(details[i].Qty * details[i].Price).ToString("C")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Add Row Button -->
+    <div class="text-right mt-3">
+        <button type="button" class="btn btn-secondary" onclick="addRow()">Add Detail</button>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-right mt-3">
+        <button type="submit" class="btn btn-primary">Submit Invoice</button>
+    </div>
+</form>
+
+
+<script>
+    function addRow() {
+        var table = document.querySelector('#details-body');
+        var rowCount = table.rows.length;
+        var row = table.insertRow();
+
+        row.innerHTML = `
+            <td><input type="text" name="InvoiceDetails[${rowCount}].Product" class="form-control" /></td>
+            <td><input type="number" name="InvoiceDetails[${rowCount}].Weight" class="form-control" /></td>
+            <td><input type="number" name="InvoiceDetails[${rowCount}].Qty" class="form-control" /></td>
+            <td><input type="number" name="InvoiceDetails[${rowCount}].Price" class="form-control" /></td>
+            <td><span class="total">0.00</span></td>
+        `;
+    }
+</script>

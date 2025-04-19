@@ -22,8 +22,11 @@
             <label for="invoiceNo" class="mr-2">Invoice No</label>
             <input type="text" id="invoiceNo" name="invoiceNo" class="form-control" value="@Context.Request.Query["invoiceNo"]" />
         </div>
-        <button type="submit" class="btn btn-primary">View</button>
+        <button type="submit" class="btn btn-primary mr-2">View</button>
+        <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Create", "TrInvoice")'">Add</button>
     </form>
+
+
 
     @if (Model != null)
     {
